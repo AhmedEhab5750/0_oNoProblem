@@ -180,12 +180,14 @@
         <div class="subtitle">Ahmed Ehab | Security Researcher | Bug Hunter</div>
     </header>
 
-    <div class="container">
-        <!-- CV Section -->
+      <div class="container">
         <section class="section" id="cv-section">
             <h2 class="section-title">> CV_</h2>
             <div id="pdf-viewer">
-                <canvas id="pdf-canvas"></canvas>
+                <div class="canvas-container" style="width: 100%; display: flex; justify-content: center;">
+                    <canvas id="pdf-canvas" style="max-width: 100%; height: auto;"></canvas>
+                </div>
+                <p id="pdf-message" style="color: var(--neon-green);"></p>
             </div>
         </section>
 
@@ -210,23 +212,34 @@
             </div>
         </section>
     </div>
-
-    <script>
-    // Initialize PDF.js with better error handling and path resolution
+	<script>
+    // Initialize PDF.js
     pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
     
     async function loadPDF() {
-        const pdfPath = './uploads/cv.pdf'; // Ensure path starts with ./
+        const baseUrl = 'https://ahmedehab5750.github.io/0_oNoProblem/portfolio-site';
+        const pdfPath = `${baseUrl}/uploads/cv.pdf`;
         
         // Show loading message
-        document.getElementById('pdf-viewer').innerHTML = `
-            <p style="color: var(--neon-green);">
-                [LOADING] Accessing CV file...
-            </p>`;
+        const messageElement = document.getElementById('pdf-message');
+        messageElement.textContent = '[LOADING] Accessing CV file...';
             
         try {
+            // Ensure canvas exists
+            const canvas = document.getElementById('pdf-canvas');
+            if (!canvas) {
+                throw new Error('Canvas element not found');
+            }
+
             // Create a fetch request to check if the file exists
-            const response = await fetch(pdfPath);
+            const response = await fetch(pdfPath, {
+                method: 'GET',
+                cache: 'no-cache', // Disable caching
+                headers: {
+                    'Accept': 'application/pdf'
+                }
+            });
+            
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -236,8 +249,10 @@
             const pdf = await loadingTask.promise;
             const page = await pdf.getPage(1);
             
-            const canvas = document.getElementById('pdf-canvas');
             const context = canvas.getContext('2d');
+            if (!context) {
+                throw new Error('Could not get canvas context');
+            }
             
             // Calculate scale to fit the container width
             const containerWidth = document.getElementById('pdf-viewer').clientWidth - 40;
@@ -254,24 +269,30 @@
                 viewport: scaledViewport
             }).promise;
             
+            // Clear the message on success
+            messageElement.textContent = '';
             console.log('PDF loaded successfully');
         } catch (error) {
             console.error('Error loading PDF:', error);
-            document.getElementById('pdf-viewer').innerHTML = `
-                <p style="color: var(--neon-green);">
-                    [ERROR] CV file not found or cannot be loaded. <br>
-                    Path attempted: ${pdfPath}<br>
-                    Error: ${error.message}<br><br>
-                    Please check:<br>
-                    1. File exists in uploads/cv.pdf<br>
-                    2. File permissions are correct<br>
-                    3. File name is exactly 'cv.pdf' (case sensitive)
-                </p>`;
+            messageElement.innerHTML = `
+                [ERROR] CV file not found or cannot be loaded. <br>
+                Path attempted: ${pdfPath}<br>
+                Error: ${error.message}<br><br>
+                Please check:<br>
+                1. File exists at the correct GitHub Pages URL<br>
+                2. File permissions are correct<br>
+                3. Repository is public and GitHub Pages is enabled<br>
+                4. Try clearing your browser cache
+            `;
         }
     }
     
-    // Load PDF when page is ready
-    document.addEventListener('DOMContentLoaded', loadPDF);
+    // Ensure the DOM is fully loaded before attempting to load the PDF
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', loadPDF);
+    } else {
+        loadPDF();
+    }
     
     // Reload PDF on window resize for better responsiveness
     let resizeTimeout;
@@ -279,6 +300,7 @@
         clearTimeout(resizeTimeout);
         resizeTimeout = setTimeout(loadPDF, 200);
     });
-</script>
+	</script>
+	
 </body>
 </html>
