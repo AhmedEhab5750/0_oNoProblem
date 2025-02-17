@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>0_oNoProblem | Security Researcher</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
+    <style>
+        /* Previous styles remain the same until the pdf-viewer and image styles */
+        :root {
+            --neon-green: #00ff00;
+            --dark-bg: #0a0a0a;
+            --terminal-green: #4af626;
+            --card-bg: #1a1a1a;
+        }
+
+        @keyframes glitch {
+            0% {
+                text-shadow: 0.05em 0 0 #00fffc, -0.03em -0.04em 0 #fc00ff,
+                            0.025em 0.04em 0 var(--neon-green);
+            }
+            15% {
+                text-shadow: 0.05em 0 0 #00fffc, -0.03em -0.04em 0 #fc00ff,
+                            0.025em 0.04em 0 var(--neon-green);
+            }
+            16% {
+                text-shadow: -0.05em -0.025em 0 #00fffc, 0.025em 0.035em 0 #fc00ff,
+                            -0.05em -0.05em 0 var(--neon-green);
+            }
+            49% {
+                text-shadow: -0.05em -0.025em 0 #00fffc, 0.025em 0.035em 0 #fc00ff,
+                            -0.05em -0.05em 0 var(--neon-green);
+            }
+            50% {
+                text-shadow: 0.05em 0.035em 0 #00fffc, 0.03em 0 0 #fc00ff,
+                            0 -0.04em 0 var(--neon-green);
+            }
+            99% {
+                text-shadow: 0.05em 0.035em 0 #00fffc, 0.03em 0 0 #fc00ff,
+                            0 -0.04em 0 var(--neon-green);
+            }
+            100% {
+                text-shadow: -0.05em 0 0 #00fffc, -0.025em -0.04em 0 #fc00ff,
+                            -0.04em -0.025em 0 var(--neon-green);
+            }
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            margin: 0;
+            padding: 0;
+            background: var(--dark-bg);
+            color: var(--terminal-green);
+            line-height: 1.6;
+        }
+
+        .header {
+            text-align: center;
+            padding: 2rem;
+            border-bottom: 2px solid var(--terminal-green);
+            background: rgba(0, 255, 0, 0.05);
+        }
+
+        .hacker-name {
+            font-size: 3rem;
+            margin: 0;
+            animation: glitch 1s infinite;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            color: var(--neon-green);
+            font-size: 1.2rem;
+            margin-top: 0.5rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .section {
+            margin: 2rem 0;
+            padding: 2rem;
+            background: var(--card-bg);
+            border: 1px solid var(--terminal-green);
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
+        }
+
+        .section-title {
+            color: var(--neon-green);
+            border-bottom: 1px solid var(--terminal-green);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Updated PDF viewer styles */
+        #pdf-viewer {
+            background: var(--card-bg);
+            padding: 1rem;
+            margin-top: 1rem;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 800px;
+        }
+
+        #pdf-canvas {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .bug-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .bug-card {
+            background: var(--card-bg);
+            border: 1px solid var(--terminal-green);
+            border-radius: 5px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .bug-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+        }
+
+        /* Updated image styles */
+        .bug-card img {
+            width: 100%;
+            height: 300px; /* Increased height */
+            object-fit: contain; /* Changed to contain */
+            background: var(--card-bg);
+            border-bottom: 1px solid var(--terminal-green);
+            padding: 1rem;
+            box-sizing: border-box;
+        }
+
+        .bug-content {
+            padding: 1.5rem;
+        }
+
+        .bug-content h3 {
+            color: var(--neon-green);
+            margin: 0 0 1rem 0;
+        }
+
+        .bug-content p {
+            margin: 0;
+            color: var(--terminal-green);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .bug-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hacker-name {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1 class="hacker-name">0_oNoProblem</h1>
+        <div class="subtitle">Ahmed Ehab | Security Researcher | Bug Hunter</div>
+    </header>
+
+    <div class="container">
+        <!-- CV Section -->
+        <section class="section" id="cv-section">
+            <h2 class="section-title">> CV_</h2>
+            <div id="pdf-viewer">
+                <canvas id="pdf-canvas"></canvas>
+            </div>
+        </section>
+
+        <!-- Bug Reports Section -->
+        <section class="section">
+            <h2 class="section-title">> Bug_Reports_</h2>
+            <div class="bug-grid">
+                <div class="bug-card">
+                    <img src="uploads/bug-images/rc1.png" alt="Bug Report 1">
+                    <div class="bug-content">
+                        <h3>> Critical SQLi Found_</h3>
+                        <p>Discovered and reported a critical SQL injection vulnerability in the login form that could allow unauthorized database access.</p>
+                    </div>
+                </div>
+                <div class="bug-card">
+                    <img src="uploads/bug-images/bug2.png" alt="Bug Report 2">
+                    <div class="bug-content">
+                        <h3>> XSS Vulnerability_</h3>
+                        <p>Identified and reported a stored XSS vulnerability in the comment system that could allow malicious script execution.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+    // Initialize PDF.js with better error handling and path resolution
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
+    
+    async function loadPDF() {
+        const pdfPath = './uploads/cv.pdf'; // Ensure path starts with ./
+        
+        // Show loading message
+        document.getElementById('pdf-viewer').innerHTML = `
+            <p style="color: var(--neon-green);">
+                [LOADING] Accessing CV file...
+            </p>`;
+            
+        try {
+            // Create a fetch request to check if the file exists
+            const response = await fetch(pdfPath);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
+            const pdfData = await response.arrayBuffer();
+            const loadingTask = pdfjsLib.getDocument({data: pdfData});
+            const pdf = await loadingTask.promise;
+            const page = await pdf.getPage(1);
+            
+            const canvas = document.getElementById('pdf-canvas');
+            const context = canvas.getContext('2d');
+            
+            // Calculate scale to fit the container width
+            const containerWidth = document.getElementById('pdf-viewer').clientWidth - 40;
+            const viewport = page.getViewport({ scale: 1.0 });
+            const scale = containerWidth / viewport.width;
+            const scaledViewport = page.getViewport({ scale });
+            
+            // Set canvas dimensions
+            canvas.width = scaledViewport.width;
+            canvas.height = scaledViewport.height;
+            
+            await page.render({
+                canvasContext: context,
+                viewport: scaledViewport
+            }).promise;
+            
+            console.log('PDF loaded successfully');
+        } catch (error) {
+            console.error('Error loading PDF:', error);
+            document.getElementById('pdf-viewer').innerHTML = `
+                <p style="color: var(--neon-green);">
+                    [ERROR] CV file not found or cannot be loaded. <br>
+                    Path attempted: ${pdfPath}<br>
+                    Error: ${error.message}<br><br>
+                    Please check:<br>
+                    1. File exists in uploads/cv.pdf<br>
+                    2. File permissions are correct<br>
+                    3. File name is exactly 'cv.pdf' (case sensitive)
+                </p>`;
+        }
+    }
+    
+    // Load PDF when page is ready
+    document.addEventListener('DOMContentLoaded', loadPDF);
+    
+    // Reload PDF on window resize for better responsiveness
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(loadPDF, 200);
+    });
+</script>
+</body>
+</html>
