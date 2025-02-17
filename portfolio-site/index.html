@@ -201,10 +201,17 @@
                 <div class="bug-card">
                     <img src="uploads/bug-images/rc1.png" alt="Bug Report 1">
                     <div class="bug-content">
-                        <h3>> Critical SQLi Found_</h3>
-                        <p>Discovered and reported a critical SQL injection vulnerability in the login form that could allow unauthorized database access.</p>
+                        <h3>> High Race Condition Vulnerability Found_</h3>
+                        <p>A race condition in the project creation process allows users to bypass plan quota limits by sending multiple parallel requests. Despite the enforced limit of 2 projects for free plans, an attacker can create unlimited projects across Development, Staging, and Production environments.
+
+			🛑 Impact:
+
+				1- Financial Loss: Users can exploit this to avoid payment for higher-tier plans.
+				2- Resource Abuse: Unlimited project creation may cause excessive resource consumption and billing inaccuracies.
+				3- Business Risk: Affects all subscription plans, threatening system integrity and operational costs.</p>
                     </div>
                 </div>
+		    <!--
                 <div class="bug-card">
                     <img src="uploads/bug-images/bug2.png" alt="Bug Report 2">
                     <div class="bug-content">
@@ -212,6 +219,7 @@
                         <p>Identified and reported a stored XSS vulnerability in the comment system that could allow malicious script execution.</p>
                     </div>
                 </div>
+		    -->
             </div>
         </section>
     </div>
