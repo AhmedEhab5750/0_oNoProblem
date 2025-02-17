@@ -201,23 +201,91 @@
                 <div class="bug-card">
                     <img src="uploads/bug-images/rc1.png" alt="Bug Report 1">
                     <div class="bug-content">
-                        <h3>> High Race Condition Vulnerability Found_</h3>
-                        <p>A race condition in the project creation process allows users to bypass plan quota limits by sending multiple parallel requests. Despite the enforced limit of 2 projects for free plans, an attacker can create unlimited projects across Development, Staging, and Production environments.
+                        <h3>> Race Condition Allows Users to Exceed Project Quota on All Plans_</h3>
+                        <p>A race condition in the project creation process allows users to bypass all plans quota limits by sending multiple parallel requests. Despite the enforced limit of 2 projects for free plans, an attacker can create unlimited projects across Development, Staging, and Production environments.
 				<br>🛑 Impact:
 				<br>1- Financial Loss: Users can exploit this to avoid payment for higher-tier plans.
 				<br>2- Resource Abuse: Unlimited project creation may cause excessive resource consumption and billing inaccuracies.
 				<br>3- Business Risk: Affects all subscription plans, threatening system integrity and operational costs.</p>
                     </div>
                 </div>
-		    <!--
                 <div class="bug-card">
-                    <img src="uploads/bug-images/bug2.png" alt="Bug Report 2">
+                    <img src="uploads/bug-images/businesslogic1.png" alt="Bug Report 2">
                     <div class="bug-content">
-                        <h3>> XSS Vulnerability_</h3>
-                        <p>Identified and reported a stored XSS vulnerability in the comment system that could allow malicious script execution.</p>
+                        <h3>> Quota Bypass via Project Transfer Between Workspaces_</h3>
+                        <p>This vulnerability allows users to bypass the intended project quota limits for the Development plan (free), potentially affecting the application's revenue model and resource management. A malicious user could exploit this vulnerability to create an unlimited number of projects in a single workspace without upgrading to a paid plan, leading to resource abuse and loss of revenue.</p>
                     </div>
                 </div>
-		    -->
+                <div class="bug-card">
+                    <img src="uploads/bug-images/accesscontrol1.png" alt="Bug Report 2">
+                    <div class="bug-content">
+                        <h3>> Unauthorized Access and Privilege Retention After Owner Removal in Redacted Console Workspace_</h3>
+                        <p>A critical access control vulnerability in console.redacted.tld allows a removed owner in a workspace to retain full access to the project. Despite being kicked, the removed owner can still manage users, invite others (including inviting himself and others as an owner), and perform owner-level operations, leading to potential project hijacking and privilege escalation.</p>
+                    </div>
+                </div>
+                <div class="bug-card">
+                    <img src="uploads/bug-images/responsemanipulation1.png" alt="Bug Report 2">
+                    <div class="bug-content">
+                        <h3>> Unauthorized access to Internal Panel due to response manipulation_</h3>
+                        <p>Using reponse manipulation I could enter an internal restricted panel.</p>
+                    </div>
+                </div>
+                <div class="bug-card">
+                    <img src="uploads/bug-images/rxss6.png" alt="Bug Report 2">
+                    <div class="bug-content">
+                        <h3>> Reflected XSS at https://redacted.tld/path/ via hidden parameter_</h3>
+                        <p>I found a hidden parameter after understanding the business carefully that does what the search parameter does but without filtering full user input the hidden parameter was the word search but in the web app country language which looks like unused because they changed the page to english</p>
+                    </div>
+                </div>
+                <div class="bug-card">
+                    <img src="uploads/bug-images/rxss5.png" alt="Bug Report 2">
+                    <div class="bug-content">
+                        <h3>> RXSS on https://project.redacted.tld/path/logout via redirectUrl GET parameter_</h3>
+                        <p>Identified and reported a Refelected XSS vulnerability in redirectUrl param by using custom payload + jsfuck.</p>
+                    </div>
+                </div>
+                <div class="bug-card">
+                    <img src="uploads/bug-images/rxss4.png" alt="Bug Report 2">
+                    <div class="bug-content">
+                        <h3>> Reflected XSS in lang Parameter on http://www.redacted.tld/_</h3>
+                        <p>Identified and reported a Refelected XSS vulnerability in a hidden param by fuzzing for it after that excuted the xss using custom payload.</p>
+                    </div>
+                </div>
+                <div class="bug-card">
+                    <img src="uploads/bug-images/rxss3.png" alt="Bug Report 2">
+                    <div class="bug-content">
+                        <h3>> Reflected Cross-Site Scripting (XSS) Vulnerability in https://www.redacted.tld/category_</h3>
+                        <p>A Cross-Site Scripting (XSS) vulnerability has been identified in the search parameter of the category page.</p>
+                    </div>
+                </div>
+                <div class="bug-card">
+                    <img src="uploads/bug-images/rxss2.png" alt="Bug Report 2">
+                    <div class="bug-content">
+                        <h3>> Reflected XSS on https://redacted.tld/path/_</h3>
+                        <p>Identified and reported a stored XSS vulnerability in a hidden parameter using custom payload.</p>
+                    </div>
+                </div>
+                <div class="bug-card">
+                    <img src="uploads/bug-images/rxss1.png" alt="Bug Report 2">
+                    <div class="bug-content">
+                        <h3>> Reflected XSS Vulnerability_</h3>
+                        <p>Identified and reported a Reflected XSS vulnerability in the search parameter.</p>
+                    </div>
+                </div>
+                <div class="bug-card">
+                    <img src="uploads/bug-images/openredirect1-2.png" alt="Bug Report 2">
+                    <div class="bug-content">
+                        <h3>> Open Redirect in Two Persistent Parameters (referrer and back) Across Multiple Redacted Assets in a very popular company_</h3>
+                        <p>Identified and reported a 2 Open Redirect vulnerabilities one using google dorking and the other by navigating and searching for hidden parameters in the site.</p>
+                    </div>
+                </div>
+                <div class="bug-card">
+                    <img src="uploads/bug-images/rc2.png" alt="Bug Report 2">
+                    <div class="bug-content">
+                        <h3>> Race Condition Enables Bypass of Login and MFA OTP Rate Limiting Verification._</h3>
+                        <p>A race condition & response manipulation vulnerabilities have been identified in the authentication workflow, allowing attackers to bypass rate limiting on the login function and manipulate responses to circumvent Multi-Factor Authentication (MFA) via email-based One-Time Passwords (OTP). By sending multiple parallel requests using a single packet attack, an attacker can bypass rate limit and get user password and gain unauthorized access to user account without being subjected to rate limiting or account lockout mechanisms.</p>
+                    </div>
+                </div>
             </div>
         </section>
     </div>
