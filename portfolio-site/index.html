@@ -220,7 +220,8 @@
                     <img src="uploads/bug-images/rc3.png" alt="Bug Report">
                     <div class="bug-content">
                         <h3>> Exploiting a Hidden Race Condition to Bypass Licensing and Claim All Subdomains on the target_</h3>
-                        <p>While manual hunting i have found an ignored function that do the same as the main function but with less security restriction.</p>
+                        <p>The Scenario In our case, example.com has a function to register a subdomain for a project a key part of their licensing and deployment system. Initially, I tested the function that registers the subdomain for my project. Surprisingly, that function did not exhibit any race condition vulnerability.
+			<br>Not one to give up easily, I dove deeper into the application. I recalled that there was another page accessible right after logging in that asked if I wanted to claim a domain. Curiosity got the better of me, so I decided to test that page manually. And boom it worked!</p>
                     </div>
                 </div>
                 <div class="bug-card">
